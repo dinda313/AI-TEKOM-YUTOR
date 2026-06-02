@@ -2,67 +2,71 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pak RT Tekkom AI</title>
 <style>
 body{font-family:Segoe UI;background:#0a0a0a;color:#e5e5e5;margin:0;height:100vh;display:flex;flex-direction:column}
 header{background:#1a1a1a;padding:15px;border-bottom:2px solid #3b82f6}
 h1{color:#3b82f6;font-size:20px;margin:0}
-.chat-container{flex:1;max-width:800px;margin:0 auto;padding:20px;display:flex;flex-direction:column}
+.chat-container{flex:1;max-width:800px;margin:0 auto;width:100%;padding:20px;display:flex;flex-direction:column}
 .chat-box{flex:1;overflow-y:auto;padding:20px;background:#111;border-radius:12px;margin-bottom:15px}
-.msg{margin:15px 0;padding:12px 18px;border-radius:12px;max-width:70%;white-space:pre-wrap}
+.msg{margin:15px 0;padding:12px 18px;border-radius:12px;max-width:70%;white-space:pre-wrap;line-height:1.6}
 .user{background:#3b82f6;margin-left:auto;text-align:right}
 .bot{background:#262626;border-left:3px solid #3b82f6}
 .input-area{display:flex;gap:10px}
-input{flex:1;padding:15px;background:#1a1a1a;border:1px solid #333;border-radius:10px;color:white}
+input{flex:1;padding:15px;background:#1a1a1a;border:1px solid #333;border-radius:10px;color:white;font-size:16px}
 button{padding:15px 25px;background:#3b82f6;border:none;border-radius:10px;color:white;font-weight:bold;cursor:pointer}
 .chip{padding:8px 12px;background:#1a1a1a;border:1px solid #333;border-radius:20px;font-size:12px;cursor:pointer;color:#aaa;margin:4px;display:inline-block}
+.chip:hover{background:#262626}
 </style>
 </head>
 <body>
-<header><h1>🤖 Pak RT Tekkom AI <span style="font-size:11px;background:#10b981;padding:3px 8px;border-radius:12px">v2.2</span></h1></header>
+<header><h1>🤖 Pak RT Tekkom AI <span style="font-size:11px;background:#10b981;padding:3px 8px;border-radius:12px">S1 v3.0</span></h1></header>
 <div class="chat-container">
 <div class="chat-box" id="chatBox">
-<div class="msg bot">Halo! Bug koma udah dibunuh 🤖\nKlik chip VLSM buat test</div>
+<div class="msg bot">Halo! Pak RT Tekkom S1 online 🤖\nBug udah aku kubur semua.\nTest: klik chip VLSM di bawah</div>
 </div>
 <div class="input-area">
-<input type="text" id="userInput" placeholder="Tanya Tekkom..." onkeypress="if(event.key==='Enter') sendMsg()">
+<input type="text" id="userInput" placeholder="Tanya Tekkom: VLSM, Fiber Optik, 5G..." onkeypress="if(event.key==='Enter') sendMsg()">
 <button onclick="sendMsg()">Kirim</button>
 </div>
 <div>
 <div class="chip" onclick="setExample('vlsm')">VLSM</div>
 <div class="chip" onclick="setExample('fiber optik')">Fiber Optik</div>
 <div class="chip" onclick="setExample('5g nr')">5G NR</div>
+<div class="chip" onclick="setExample('subnetting rumus')">Rumus Subnet</div>
 </div>
 </div>
 <script>
 const kb = {
-'vlsm': '✂️ VLSM = Variable Length Subnet Mask\nHemat IP. Contoh: Kantor 200 host=/24. Cabang 50 host=/26. Cabang 10 host=/28.\nTanpa VLSM boros 700 IP. Tekkom S1 wajib bisa ini',
-'fiber optik': '💡 Fiber Optik Tekkom:\nSingle Mode: Inti 9μm, laser, jarak 100km. Backbone antar kota\nMulti Mode: Inti 50μm, LED, jarak 2km. Gedung/kampus\nKerugian: redaman 0.35dB/km, bending loss',
-'5g nr': '📶 5G New Radio:\nFreq: sub-6GHz + mmWave 26GHz\nKecepatan: 20 Gbps downlink\nLatensi: 1ms buat URLLC mobil self-driving\nTeknologi: Massive MIMO, Beamforming, Network Slicing'
+'vlsm': '✂️ VLSM = Variable Length Subnet Mask\nHemat IP address. Subnet nggak rata.\nContoh:\nKantor pusat 200 host = /24\nCabang A 50 host = /26\nCabang B 10 host = /28\nTanpa VLSM: semua dikasih /24 = boros 700 IP\nDengan VLSM: hemat banget\nTekkom S1: wajib bisa ngitung ini buat UTS Jaringan',
+'fiber optik': '💡 Fiber Optik Tekkom\nSingle Mode:\n- Inti: 9μm\n- Sumber cahaya: Laser\n- Jarak: 100km\n- Dipake: Backbone antar kota/negara\nMulti Mode:\n- Inti: 50μm atau 62.5μm\n- Sumber cahaya: LED\n- Jarak: 2km\n- Dipake: Gedung, kampus\nKerugian: Redaman 0.35dB/km, Bending loss, Konektor kotor\nRumus: Power RX = Power TX - Redaman - Loss konektor',
+'5g nr': '📶 5G New Radio\nFrekuensi: sub-6GHz + mmWave 26GHz/28GHz\nKecepatan: 20 Gbps downlink teoritis\nLatensi: 1ms untuk URLLC = mobil self-driving\nTeknologi kunci:\n1. Massive MIMO: antena 64x64\n2. Beamforming: sinyal fokus ke user\n3. Network Slicing: 1 fisik dibagi banyak jaringan virtual\n3 Use case 5G:\neMBB = internet cepat\nmMTC = IoT jutaan device\nURLLC = latensi rendah',
+'subnetting rumus': '🔢 Rumus Subnetting WAJIB HAFAL\n1. Block Size = 256 - subnet mask oktet terakhir\n Contoh /26: 256-192 = 64\n2. Jumlah Host = 2^(32-prefix) - 2\n /26: 2^6 - 2 = 62 host\n3. Network ID = kelipatan Block Size\n /26: 0, 64, 128, 192\n4. Broadcast = Network ID + Block Size - 1\n 0+64-1 = 63\n5. IP Valid = Network ID+1 sampai Broadcast-1'
+};
+function sendMsg() {
+let input = document.getElementById('userInput');
+let msg = input.value.trim().toLowerCase();
+if(msg === '') return;
+addMsg(input.value, 'user');
+input.value = '';
+setTimeout(function() {
+let reply = 'Materi belum ada di database Pak RT Tekkom v3.0 😅\nCoba klik chip: VLSM, Fiber Optik, 5G NR, Rumus Subnet';
+for(let key in kb) {
+if(msg.includes(key)) {
+reply = kb[key];
+break;
 }
-function sendMsg(){
-let input=document.getElementById('userInput')
-let msg=input.value.trim().toLowerCase()
-if(msg==='')return
-addMsg(input.value,'user')
-input.value=''
-setTimeout(()=>{
-let reply='Materi belum ada. Coba klik: vlsm, fiber optik, 5g nr'
-for(let key in kb){
-if(msg.includes(key)){
-reply=kb[key]
-break
+addMsg(reply, 'bot');
+}, 500);
 }
-addMsg(reply,'bot')
-},500)
+function addMsg(text, type) {
+document.getElementById('chatBox').innerHTML += '<div class="msg ' + type + '">' + text + '</div>';
+document.getElementById('chatBox').scrollTop = 999;
 }
-function addMsg(text,type){
-document.getElementById('chatBox').innerHTML+=`<div class="msg ${type}">${text}</div>`
-document.getElementById('chatBox').scrollTop=99999
-}
-function setExample(text){
-document.getElementById('userInput').value=text
-sendMsg()
+function setExample(text) {
+document.getElementById('userInput').value = text;
+sendMsg();
 }
 </script>
 </body>
