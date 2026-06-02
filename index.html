@@ -112,7 +112,15 @@ transform:translateY(0)
 var data={
 vlsm:'VLSM = Variable Length Subnet Mask\nHemat IP. Contoh: Kantor 200 host=/24, Cabang 50 host=/26, Cabang 10 host=/28\nTekkom S1 wajib bisa',
 fiber:'Fiber Optik:\nSingle Mode: inti 9um, laser, 100km, backbone\nMulti Mode: inti 50um, LED, 2km, gedung\nRumus: RX = TX - redaman',
-'5g':'5G New Radio:\nKecepatan 20Gbps\nLatensi 1ms URLLC\nTeknologi: Massive MIMO, Beamforming'
+'5g':'5G New Radio:\nKecepatan 20Gbps\nLatensi 1ms URLLC\nTeknologi: Massive MIMO, Beamforming',
+
+subnetting:'SUBNETTING DASAR WAJIB HAFAL\n1. Cari Block Size: 256 - subnet mask\n   Contoh /26: 256-192 = 64\n2. Network ID: kelipatan Block Size\n   /26: 0, 64, 128, 192...\n3. Broadcast: Network + Block - 1\n   0+64-1 = 63\n4. Host Valid: Network+1 s/d Broadcast-1\n   1 sampai 62',
+
+rumus_subnet:'RUMUS CEPAT SUBNETTING\nHost = 2^(32-prefix) - 2\n/24 = 2^8-2 = 254 host\n/25 = 2^7-2 = 126 host\n/26 = 2^6-2 = 62 host\n/27 = 2^5-2 = 30 host\n/28 = 2^4-2 = 14 host\n/29 = 2^3-2 = 6 host\n/30 = 2^2-2 = 2 host = buat P2P router',
+
+contoh_soal:'CONTOH SOAL UTS TEKKOM\nIP: 192.168.1.100/26\nDitanya: Network, Broadcast, Host Valid?\nJawab:\nBlock = 256-192 = 64\nNetwork = 192.168.1.64\nBroadcast = 64+64-1 = 127\nHost Valid = 65 sampai 126\nTotal host = 62',
+
+cidr:'CIDR = Classless Inter-Domain Routing\nMenggantikan sistem kelas A/B/C\nNotasi: IP/Prefix\nContoh: 192.168.1.0/24 = 256 IP\n/24 = subnet mask 255.255.255.0\n/16 = 255.255.0.0\n/8 = 255.0.0.0\nSemakin besar prefix = semakin kecil jaringan'
 };
 
 function kirim(){
