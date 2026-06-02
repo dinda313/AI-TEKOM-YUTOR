@@ -19,10 +19,10 @@ button{padding:15px 25px;background:#3b82f6;border:none;border-radius:10px;color
 </style>
 </head>
 <body>
-<header><h1>🤖 Pak RT Tekkom AI <span style="font-size:11px;background:#10b981;padding:3px 10px;border-radius:12px">S1 Level v2.0</span></h1></header>
+<header><h1>🤖 Pak RT Tekkom AI <span style="font-size:11px;background:#10b981;padding:3px 10px;border-radius:12px">S1 v2.1 Fix</span></h1></header>
 <div class="chat-container">
 <div class="chat-box" id="chatBox">
-<div class="msg bot">Halo! Aku Pak RT Tekkom 🤖 S1 Level\nSpesialis: OSI, Subnetting, VLSM, VLAN, Fiber Optik, 5G, Routing\nTest: ketik 'vlsm' atau klik chip di bawah</div>
+<div class="msg bot">Halo! Pak RT Tekkom online 🤖\nBug udah dibantai. Test: ketik 'vlsm' atau klik chip</div>
 </div>
 <div class="input-area">
 <input type="text" id="userInput" placeholder="Tanya Tekkom..." onkeypress="if(event.key==='Enter') sendMsg()">
@@ -33,26 +33,16 @@ button{padding:15px 25px;background:#3b82f6;border:none;border-radius:10px;color
 <div class="chip" onclick="setExample('fiber optik')">Fiber Optik</div>
 <div class="chip" onclick="setExample('5g nr')">5G NR</div>
 <div class="chip" onclick="setExample('routing protocol')">OSPF BGP</div>
-<div class="chip" onclick="setExample('subnetting rumus')">Rumus Subnet</div>
 </div>
 </div>
 <script>
 const kb = {
-'osi layer 1': '📡 Layer 1: Physical\nHardware: kabel UTP Cat5e/Cat6, fiber optik Single/Multi Mode, switch, router, antena dBi.\nKerja: kirim bit 0/1 via listrik/cahaya/radio.\nAnalogi: Aspal + truk. Kabel putus = macet total.\nTekkom: Redaman fiber dB/km, bandwidth Cat6 10Gbps.',
-'osi layer 2': '🔗 Layer 2: Data Link\nMAC Address + Switch + VLAN ID.\nKerja: kirim frame antar device 1 LAN. Cek error pake CRC.\nTekkom: Switch Layer 2, VLAN 802.1Q, Spanning Tree Protocol biar nggak loop broadcast.',
-'osi layer 3': '🌐 Layer 3: Network\nIP Address + Router + Routing Table.\nKerja: tentuin jalur paket beda jaringan. IP 192.168.1.5 → 8.8.8.8\nTekkom: IPv4 vs IPv6, Static Routing, Dynamic OSPF, BGP antar AS.',
-'subnetting rumus': '🔢 Rumus Subnetting WAJIB:\n1. Block Size = 256 - subnet mask oktet terakhir. /26 = 256-192 = 64\n2. Host/subnet = 2^(32-prefix) - 2\n3. Network ID = kelipatan Block Size\n4. Broadcast = Network ID + Block Size - 1\nContoh /26: Block 64, Host 62, Broadcast +63',
-'subnet 10.0.0.0/26': '🔢 Subnet 10.0.0.0/26\nBlock Size: 64\nNetwork ID: 10.0.0.0\nIP Range: 10.0.0.1 - 10.0.0.62\nBroadcast: 10.0.0.63\nSubnet berikut: 10.0.0.64\nDipake: Lab 50 PC + 12 cadangan. Efisien!',
-'vlsm': '✂️ VLSM = Variable Length Subnet Mask\nSubnet nggak rata biar hemat IP.\nContoh: Kantor 200 host = /24. Cabang A 50 host = /26. Cabang B 10 host = /28.\nTanpa VLSM: semua /24 = boros 700 IP.\nTekkom S1: wajib bisa ngitung ini buat UTS Jaringan.',
-'tcp 3 way handshake': '🤝 TCP 3-Way Handshake:\n1. Client → Server: SYN Seq=x\n2. Server → Client: SYN-ACK Seq=y Ack=x+1\n3. Client → Server: ACK Ack=y+1\nKenapa 3x? Biar 2 sisi sinkron nomor urut paket. Kalo 2x bisa tabrakan data.',
-'tcp vs udp': 'TCP vs UDP Tekkom:\nTCP: Reliable, Ordered, Header 20 byte. Ada Flow Control + Congestion Control.\nDipake: HTTP, FTP, Email, Database.\nUDP: Fast, Light, Header 8 byte. No control.\nDipake: VoIP, Streaming, DNS, Game. Hilang 1 frame video nggak ngaruh.',
-'ipv6': '🌐 IPv6 = 128 bit = 3.4×10^38 alamat. Cukup buat tiap atom di bumi dikasih IP.\nFormat: 2001:db8:85a3::8a2e:370:7334\nKeunggulan: No NAT, Auto-config SLAAC, Header simpel, Built-in IPSec.\nMigrasi: Dual Stack IPv4+IPv6 atau Tunneling.',
-'dns record': '📞 DNS Record Tekkom:\nA = IP v4. google.com → 142.250.x\nAAAA = IP v6\nCNAME = Alias www → google.com\nMX = Mail server buat email\nNS = Nama server DNS\nTTL = Time To Live cache detik',
-'routing protocol': '🗺️ Routing Protocol:\nOSPF: IGP, area-based, cepet konvergen. Dipake ISP dalem negeri. Metric = cost.\nBGP: EGP, antar AS/negara. "Jalan ke Belanda lewat Singapura apa Australia?" Metric = AS Path.\nRIP: jadul, max 15 hop, update 30 detik. Buat belajar doang.',
-'vlan': '🏷️ VLAN = Virtual LAN\nBikin banyak LAN di 1 switch fisik.\nVLAN 10 = Lab, VLAN 20 = Dosen, VLAN 30 = Tamu. Nggak bisa saling ping.\nKeuntungan: Hemat kabel, keamanan, broadcast domain kecil.\nTagging: 802.1Q tambah 4 byte header di frame Layer 2.',
-'fiber optik': '💡 Fiber Optik Tekkom:\nSingle Mode: Inti 9μm, laser, jarak 100km, mahal. Backbone antar kota.\nMulti Mode: Inti 50μm, LED, jarak 2km, murah. Gedung/kampus.\nKerugian: redaman 0.35dB/km, bending loss, konektor kotor.\nRumus: Power RX dBm = Power TX - Redaman - Konektor loss.',
-'5g nr': '📶 5G New Radio:\nFreq: sub-6GHz + mmWave 26GHz/28GHz.\nKecepatan: 20 Gbps downlink teoritis.\nLatensi: 1ms buat URLLC = mobil self-driving.\nTeknologi: Massive MIMO 64x64, Beamforming, Network Slicing.\n3 Use case: eMBB=cepat, mMTC=IoT jutaan, URLLC=latensi rendah.',
-'mikrotik nat': '🧱 NAT Mikrotik:\nsrc-nat: IP lokal 192.168.1.5 → IP publik. Buat keluar internet.\nDst-nat: Port Forwarding. IP publik:8080 → 192.168.1.10:80. Buka web server dari luar.\nChain: prerouting = sebelum routing, postrouting = sesudah routing.\nUKK SMK wajib bisa ini.'
+'osi layer 1': '📡 Layer 1: Physical\nHardware: kabel UTP Cat5e/Cat6, fiber Single/Multi Mode, switch, router.\nTekkom: Redaman fiber dB/km, bandwidth Cat6 10Gbps',
+'vlsm': '✂️ VLSM = Variable Length Subnet Mask\nHemat IP. Contoh: Kantor 200 host=/24. Cabang 50 host=/26. Cabang 10 host=/28.\nTanpa VLSM boros 700 IP. Tekkom S1 wajib bisa ini buat UTS',
+'subnetting rumus': '🔢 Rumus Subnetting:\n1. Block Size = 256 - subnet mask oktet terakhir\n2. Host = 2^(32-prefix) - 2\n3. Network ID = kelipatan Block Size\n4. Broadcast = Network ID + Block Size - 1',
+'fiber optik': '💡 Fiber Optik:\nSingle Mode: Inti 9μm, laser, 100km, mahal. Backbone antar kota\nMulti Mode: Inti 50μm, LED, 2km, murah. Gedung/kampus\nRumus: Power RX = Power TX - Redaman - Konektor loss',
+'5g nr': '📶 5G New Radio:\nFreq: sub-6GHz + mmWave 26GHz\nKecepatan: 20 Gbps\nLatensi: 1ms URLLC buat mobil self-driving\nTeknologi: Massive MIMO, Beamforming, Network Slicing',
+'routing protocol': '🗺️ Routing Protocol:\nOSPF: IGP, area-based, cepet konvergen. Metric = cost. Dipake ISP\nBGP: EGP, antar AS/negara. Metric = AS Path. "Jalan ke Belanda lewat mana?"'
 };
 function sendMsg(){
 let input=document.getElementById('userInput');
@@ -61,7 +51,7 @@ if(msg==='')return;
 addMsg(input.value,'user');
 input.value='';
 setTimeout(()=>{
-let reply='Materi belum ada di database Pak RT Tekkom v2.0 😅\nCoba: vlsm, fiber optik, 5g nr, routing protocol, subnetting rumus';
+let reply='Materi belum ada. Coba: vlsm, fiber optik, 5g nr, routing protocol, subnetting rumus';
 for(let key in kb){
 if(msg.includes(key)){
 reply=kb[key];
