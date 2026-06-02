@@ -36,8 +36,28 @@ button{padding:15px 25px;background:#3b82f6;border:none;border-radius:10px;color
 </div>
 <script>
 const kb={
-'osi layer 7':'📱 Layer 7: Application\nPintu gerbang user. Contoh: HTTP, Email, Browser.\nAnalogi: Kamu nulis isi surat.',
-'subnet 192.168.1.0/24':'🔢 Subnet 192.168.1.0/24\nNetwork ID: 192.168.1.0\nBroadcast: 192.168.1.255\nRange IP: 192.168.1.1 - 192.168.1.254\nTotal Host: 254\nRumus: 2^(32-24) - 2 = 254'
+const kb={
+'osi layer 1': '📡 Layer 1: Physical\nHardware beneran: kabel UTP, fiber optik, switch, router, sinyal 5G.\nKerja: ngirim bit 0/1 via listrik/cahaya/radio.\nAnalogi: Aspal + truk + jalan raya. Kalo kabel putus = macet total.\nTekkom: Single Mode vs Multi Mode fiber, Cat5e vs Cat6, dBi antena.',
+
+'osi layer 2': '🔗 Layer 2: Data Link\nMAC Address + Switch + VLAN.\nKerja: kirim frame antar device 1 segmen LAN. Cek error pake CRC.\nAnalogi: Kurir antar rumah 1 RT. Dia cuma tau nama jalan + no rumah = MAC Address.\nTekkom: Switch Layer 2, VLAN ID, Spanning Tree Protocol biar nggak loop.',
+
+'osi layer 3 ip': '🌐 Layer 3: Network\nIP Address + Router + Routing.\nKerja: tentuin jalur paket antar jaringan beda. IP 192.168.1.5 → 8.8.8.8\nAnalogi: Google Maps + tukang pos antar kota. Dia liat alamat IP = kode pos.\nTekkom: IPv4 vs IPv6, Static vs Dynamic Routing, OSPF, BGP.',
+
+'subnetting rumus': '🔢 Rumus Subnetting WAJIB HAFAL:\n1. Block Size = 256 - subnet mask oktet terakhir. /26 = 256-192 = 64\n2. Jumlah Subnet = 2^bit yg dipinjem\n3. Host/subnet = 2^bit host - 2\n4. Network ID = kelipatan Block Size\n5. Broadcast = Network ID + Block Size - 1\nContoh /26: Block 64, Host 62, Broadcast +63 dari Network.',
+
+'subnet 10.0.0.0/26': '🔢 Subnet 10.0.0.0/26\nBlock Size: 64\nNetwork ID: 10.0.0.0\nIP pertama: 10.0.0.1\nIP terakhir: 10.0.0.62\nBroadcast: 10.0.0.63\nSubnet berikut: 10.0.0.64\nDipake: 1 lab 50 PC + 12 IP cadangan. Efisien!', 
+
+'vlsm': '✂️ VLSM = Variable Length Subnet Mask\nSubnet nggak rata. Hemat IP.\nContoh: Kantor pusat butuh 200 host = /24. Cabang A butuh 50 host = /26. Cabang B butuh 10 host = /28.\nTanpa VLSM: semua dikasih /24 = boros 700 IP.\nTekkom S1 wajib bisa ngitung ini buat UTS.',
+
+'tcp 3 way handshake': '🤝 TCP 3-Way Handshake detail:\n1. SYN: Client kirim Seq=x "Mau konek"\n2. SYN-ACK: Server balas Seq=y, Ack=x+1 "Oke, aku denger kamu"\n3. ACK: Client balas Ack=y+1 "Sip konek"\nKenapa 3x? Biar 2 sisi sama2 tau nomor urut awal. Kalo cuma 2x = bisa tabrakan data.',
+
+'tcp vs udp detail': 'TCP vs UDP buat Tekkom:\nTCP = Reliable, Ordered, Heavy. Header 20 byte. Ada Flow Control + Congestion Control.\nDipake: HTTP, FTP, Email, Database.\nUDP = Unreliable, Fast, Light. Header 8 byte. No control.\nDipake: VoIP, Streaming, DNS, Game. Hilang 1 frame video = nggak ngaruh.',
+
+'ipv6': '🌐 IPv6 = 128 bit = 3.4×10^38 alamat. Cukup buat tiap atom di bumi dikasih IP wkwk.\nFormat: 2001:0db8:85a3:0000:0000:8a2e:0370:7334\nBoleh disingkat: 2001:db8:85a3::8a2e:370:7334\nKeunggulan: No NAT, Auto-config, Header simpel, Built-in IPSec.\nTekkom: Migrasi IPv4→IPv6 pake Dual Stack / Tunneling.',
+
+'dns record': '📞 DNS Record Tekkom:\nA = IP v4. google.com → 142.250.x\nAAAA = IP v6\nCNAME = Alias. www.google.com → google.com\nMX = Mail server. Buat email @gmail.com\nNS = Nama server DNS\nTTL = Time To Live, cache DNS berapa detik.',
+
+'routing protocol': '🗺️ Routing Protocol Tekkom:\nOSPF = Open Shortest Path First. IGP, area-based, cepet konvergen. Dipake ISP dalem negeri.\nBGP = Border Gateway Protocol. EGP, antar AS/negara. "Jalan ke Belanda lewat Singapura apa Australia?"
 };
 function sendMsg(){
 let input=document.getElementById('userInput');
