@@ -2,27 +2,27 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Pak RT Tekkom AI | S1 Level</title>
+<title>Pak RT Tekkom AI</title>
 <style>
-body{font-family:Segoe UI;background:#0a0a0a;color:#e5e5e5;margin:0;display:flex;flex-direction:column;height:100vh}
+body{font-family:Segoe UI;background:#0a0a0a;color:#e5e5e5;margin:0;height:100vh;display:flex;flex-direction:column}
 header{background:#1a1a1a;padding:15px;border-bottom:2px solid #3b82f6}
 h1{color:#3b82f6;font-size:20px;margin:0}
 .chat-container{flex:1;max-width:800px;margin:0 auto;padding:20px;display:flex;flex-direction:column}
 .chat-box{flex:1;overflow-y:auto;padding:20px;background:#111;border-radius:12px;margin-bottom:15px}
-.msg{margin:15px 0;padding:12px 18px;border-radius:12px;max-width:70%;white-space:pre-wrap;line-height:1.6}
+.msg{margin:15px 0;padding:12px 18px;border-radius:12px;max-width:70%;white-space:pre-wrap}
 .user{background:#3b82f6;margin-left:auto;text-align:right}
 .bot{background:#262626;border-left:3px solid #3b82f6}
 .input-area{display:flex;gap:10px}
 input{flex:1;padding:15px;background:#1a1a1a;border:1px solid #333;border-radius:10px;color:white}
 button{padding:15px 25px;background:#3b82f6;border:none;border-radius:10px;color:white;font-weight:bold;cursor:pointer}
-.chip{padding:8px 12px;background:#1a1a1a;border:1px solid #333;border-radius:20px;font-size:12px;cursor:pointer;color:#aaa;display:inline-block;margin:4px}
+.chip{padding:8px 12px;background:#1a1a1a;border:1px solid #333;border-radius:20px;font-size:12px;cursor:pointer;color:#aaa;margin:4px;display:inline-block}
 </style>
 </head>
 <body>
-<header><h1>🤖 Pak RT Tekkom AI <span style="font-size:11px;background:#10b981;padding:3px 10px;border-radius:12px">S1 v2.1 Fix</span></h1></header>
+<header><h1>🤖 Pak RT Tekkom AI <span style="font-size:11px;background:#10b981;padding:3px 8px;border-radius:12px">v2.2</span></h1></header>
 <div class="chat-container">
 <div class="chat-box" id="chatBox">
-<div class="msg bot">Halo! Pak RT Tekkom online 🤖\nBug udah dibantai. Test: ketik 'vlsm' atau klik chip</div>
+<div class="msg bot">Halo! Bug koma udah dibunuh 🤖\nKlik chip VLSM buat test</div>
 </div>
 <div class="input-area">
 <input type="text" id="userInput" placeholder="Tanya Tekkom..." onkeypress="if(event.key==='Enter') sendMsg()">
@@ -32,41 +32,37 @@ button{padding:15px 25px;background:#3b82f6;border:none;border-radius:10px;color
 <div class="chip" onclick="setExample('vlsm')">VLSM</div>
 <div class="chip" onclick="setExample('fiber optik')">Fiber Optik</div>
 <div class="chip" onclick="setExample('5g nr')">5G NR</div>
-<div class="chip" onclick="setExample('routing protocol')">OSPF BGP</div>
 </div>
 </div>
 <script>
 const kb = {
-'osi layer 1': '📡 Layer 1: Physical\nHardware: kabel UTP Cat5e/Cat6, fiber Single/Multi Mode, switch, router.\nTekkom: Redaman fiber dB/km, bandwidth Cat6 10Gbps',
-'vlsm': '✂️ VLSM = Variable Length Subnet Mask\nHemat IP. Contoh: Kantor 200 host=/24. Cabang 50 host=/26. Cabang 10 host=/28.\nTanpa VLSM boros 700 IP. Tekkom S1 wajib bisa ini buat UTS',
-'subnetting rumus': '🔢 Rumus Subnetting:\n1. Block Size = 256 - subnet mask oktet terakhir\n2. Host = 2^(32-prefix) - 2\n3. Network ID = kelipatan Block Size\n4. Broadcast = Network ID + Block Size - 1',
-'fiber optik': '💡 Fiber Optik:\nSingle Mode: Inti 9μm, laser, 100km, mahal. Backbone antar kota\nMulti Mode: Inti 50μm, LED, 2km, murah. Gedung/kampus\nRumus: Power RX = Power TX - Redaman - Konektor loss',
-'5g nr': '📶 5G New Radio:\nFreq: sub-6GHz + mmWave 26GHz\nKecepatan: 20 Gbps\nLatensi: 1ms URLLC buat mobil self-driving\nTeknologi: Massive MIMO, Beamforming, Network Slicing',
-'routing protocol': '🗺️ Routing Protocol:\nOSPF: IGP, area-based, cepet konvergen. Metric = cost. Dipake ISP\nBGP: EGP, antar AS/negara. Metric = AS Path. "Jalan ke Belanda lewat mana?"'
-};
+'vlsm': '✂️ VLSM = Variable Length Subnet Mask\nHemat IP. Contoh: Kantor 200 host=/24. Cabang 50 host=/26. Cabang 10 host=/28.\nTanpa VLSM boros 700 IP. Tekkom S1 wajib bisa ini',
+'fiber optik': '💡 Fiber Optik Tekkom:\nSingle Mode: Inti 9μm, laser, jarak 100km. Backbone antar kota\nMulti Mode: Inti 50μm, LED, jarak 2km. Gedung/kampus\nKerugian: redaman 0.35dB/km, bending loss',
+'5g nr': '📶 5G New Radio:\nFreq: sub-6GHz + mmWave 26GHz\nKecepatan: 20 Gbps downlink\nLatensi: 1ms buat URLLC mobil self-driving\nTeknologi: Massive MIMO, Beamforming, Network Slicing'
+}
 function sendMsg(){
-let input=document.getElementById('userInput');
-let msg=input.value.trim().toLowerCase();
-if(msg==='')return;
-addMsg(input.value,'user');
-input.value='';
+let input=document.getElementById('userInput')
+let msg=input.value.trim().toLowerCase()
+if(msg==='')return
+addMsg(input.value,'user')
+input.value=''
 setTimeout(()=>{
-let reply='Materi belum ada. Coba: vlsm, fiber optik, 5g nr, routing protocol, subnetting rumus';
+let reply='Materi belum ada. Coba klik: vlsm, fiber optik, 5g nr'
 for(let key in kb){
 if(msg.includes(key)){
-reply=kb[key];
-break;
+reply=kb[key]
+break
 }
-addMsg(reply,'bot');
-},600)
+addMsg(reply,'bot')
+},500)
 }
 function addMsg(text,type){
-document.getElementById('chatBox').innerHTML+=`<div class="msg ${type}">${text}</div>`;
-document.getElementById('chatBox').scrollTop=99999;
+document.getElementById('chatBox').innerHTML+=`<div class="msg ${type}">${text}</div>`
+document.getElementById('chatBox').scrollTop=99999
 }
 function setExample(text){
-document.getElementById('userInput').value=text;
-sendMsg();
+document.getElementById('userInput').value=text
+sendMsg()
 }
 </script>
 </body>
