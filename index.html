@@ -58,11 +58,12 @@ reply = kb[key];
 break;
 }
 addMsg(reply, 'bot');
-, 500);
+}, 500);
 }
+
 function addMsg(text, type) {
-document.getElementById('chatBox').innerHTML += '<div class="msg ' + type + '">' + text + '</div>';
-document.getElementById('chatBox').scrollTop = 999;
+document.getElementById('chatBox').innerHTML += `<div class="msg ${type}">${text}</div>`;
+document.getElementById('chatBox').scrollTop = 99999;
 }
 function setExample(text) {
 document.getElementById('userInput').value = text;
